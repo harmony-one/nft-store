@@ -4,7 +4,7 @@ import { navigate } from "@reach/router"
 import Fortmatic from 'fortmatic';
 //default state
 const defaultState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     account: null,
 }
 export const fortmaticReducer = getReducer(defaultState)
@@ -13,10 +13,7 @@ export const fortmaticState = getState('fortmaticReducer', defaultState)
 /********************************
 Formatic Login
 ********************************/
-const accounts = {
-    '0xb45B3F9c2d1D3aD20cb63740b6eBfe899Fc59BE1': 'minter', //mattdlockyer
-    '0x700025011e56659Acf547473166F5DFDE40eA439': 'account' //matt
-}
+
 
 export const fortmaticSignOut = () => async (dispatch) => {
     const fmPhantom = new Fortmatic.Phantom('pk_test_1C24F45217D39E66'); // ✨
@@ -35,6 +32,7 @@ export const checkFortmaticLogin = () => async (dispatch) => {
     await dispatch({ type: UPDATE, isLoggedIn: true })
     await dispatch(signIn())
     dispatch(updateProcessing(false))
+    return true
 
     // const fmPhantom = new Fortmatic.Phantom('pk_test_1C24F45217D39E66'); // ✨
     // if (fmPhantom.user && (await fmPhantom.user.isLoggedIn())) {
